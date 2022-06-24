@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+
+    <weather>
+        <City_Name>Bangalore</City_Name>
+        <Latitude>18.2</Latitude>
+        <Longitude>20.4</Longitude>
+        <Humidity>20.6</Humidity>
+        <Temperature>30</Temperature>
+    </weather>
+
+
