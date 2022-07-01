@@ -6,11 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -63,7 +66,26 @@ public class viewdataactivity extends AppCompatActivity {
         }
         else if(datatype.equals("json"))
         {
-            jsoncontenttextview.setText("Test json parsed content");
+            jsoncontenttextview.setText("Test json parsed content");{
+            try {
+                InputStream inputStream = getAssets().open("weather.json");
+                {
+                    byte[] data = new byte[inputStream.available()];
+                    inputStream.read(data);
+                    String jsonString = new String(data);
+                    JSONObject jsonobject = new JSONObject(jsonString);
+                    JSONObject weather = jsonobject.getJSONObject("weather");
+                    jsoncontenttextview.setText("city_name:" + weather.getString("city_name") +"\n");
+                    jsoncontenttextview.append("Latitude:" + weather.getString("Latitude") +"\n");
+                    jsoncontenttextview.append("Longitude:" + weather.getString("Longitude") +"\n");
+                    jsoncontenttextview.append("temperature:" + weather.getString("temperature") +"\n");
+                }
+            } catch (JSONException | IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+
         }
     }
 
